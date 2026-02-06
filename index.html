@@ -3,26 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌌 My Image Memories 📸</title>
+<title>🌌 My Photo Memories 📸</title>
 <style>
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    margin: 0; padding: 10px;
-    background: linear-gradient(-45deg, #667eea, #764ba2, #c084fc, #6b5b95);
-    background-size: 400% 400%;
-    animation: gradientBG 20s ease infinite;
-    min-height: 100vh;
-    color: #fff;
+    margin:0; padding:10px;
+    background: linear-gradient(-45deg,#667eea,#764ba2,#c084fc,#6b5b95);
+    background-size:400% 400%;
+    animation:gradientBG 20s ease infinite;
+    min-height:100vh;
+    color:#fff;
 }
-@keyframes gradientBG {
-    0% {background-position:0% 50%;}
-    50% {background-position:100% 50%;}
-    100% {background-position:0% 50%;}
+@keyframes gradientBG{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
-h1 { text-align:center; margin-bottom:5px; font-size:2em; text-shadow:2px2px10px rgba(0,0,0,0.3);}
-.sub-desc { text-align:center; margin-bottom:20px; font-size:14px; opacity:0.85; color:#ffeb3b; text-shadow:1px1px3px rgba(0,0,0,0.4); line-height:1.4;}
-
-.container { display:flex; gap:20px; flex-wrap:wrap;}
+h1 {text-align:center;margin-bottom:5px;font-size:2em;text-shadow:2px2px10px rgba(0,0,0,0.3);}
+.sub-desc {text-align:center;margin-bottom:20px;font-size:14px;color:#ffeb3b;opacity:0.9;text-shadow:1px1px3px rgba(0,0,0,0.4);line-height:1.4;}
+.container {display:flex;gap:20px;flex-wrap:wrap;}
 .input-panel, .gallery-panel {
     background: rgba(255,255,255,0.15);
     backdrop-filter: blur(10px);
@@ -30,52 +29,38 @@ h1 { text-align:center; margin-bottom:5px; font-size:2em; text-shadow:2px2px10px
     border-radius:20px;
     box-shadow:0 8px 20px rgba(0,0,0,0.3);
 }
-.input-panel { flex:1; min-width:250px; display:flex; flex-direction:column; gap:8px;}
-.gallery-panel { flex:2; min-width:300px;}
-.input-panel input, .input-panel textarea, .search-box input { width:100%; padding:8px; border-radius:12px; border:none; font-size:14px;}
-.input-panel textarea { height:32px; resize:none;}
-.input-panel button { padding:10px; border-radius:12px; border:none; background:linear-gradient(135deg,#6c5ce7,#a29bfe); color:white; cursor:pointer;}
-.hint { font-size:12px;color:#ccc; margin-top:-6px; margin-bottom:6px; }
-
-/* Gallery */
-.gallery { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:15px;}
-.card { position:relative; background:rgba(255,255,255,0.2); border-radius:18px; overflow:hidden; box-shadow:0 6px 20px rgba(0,0,0,0.3);}
-.card img{ width:100%; height:120px; object-fit:contain; background:rgba(0,0,0,0.2);}
-.card-body{ padding:8px;}
-.date{ font-size:12px; opacity:0.8;}
-.description{ font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
-
-/* View button fixed bottom-right */
+.input-panel {flex:1; min-width:250px; display:flex; flex-direction:column; gap:8px;}
+.gallery-panel {flex:2; min-width:300px;}
+.input-panel input, .input-panel textarea, .search-box input {width:100%; padding:8px; border-radius:12px; border:none; font-size:14px;}
+.input-panel textarea {height:32px; resize:none;}
+.input-panel button {padding:10px; border-radius:12px; border:none; background:linear-gradient(135deg,#6c5ce7,#a29bfe); color:white; cursor:pointer;}
+.hint {font-size:12px;color:#ccc; margin-top:-6px;margin-bottom:6px;}
+.gallery {display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:15px;}
+.card {position:relative; background:rgba(255,255,255,0.2); border-radius:18px; overflow:hidden; box-shadow:0 6px 20px rgba(0,0,0,0.3);}
+.card img{width:100%; height:120px; object-fit:contain; background:rgba(0,0,0,0.2);}
+.card-body{padding:8px;}
+.date{font-size:12px; opacity:0.8;}
+.description{font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 .view-overlay {
-    position:absolute;
-    bottom:5px;
-    right:5px;
-    background:rgba(0,0,0,0.7);
-    color:#fff;
-    font-size:12px;
-    padding:4px 8px;
-    border-radius:6px;
-    cursor:pointer;
-    opacity:1; /* always visible */
+    position:absolute; bottom:5px; right:5px; background:rgba(0,0,0,0.7);
+    color:#fff; font-size:12px; padding:4px 8px; border-radius:6px; cursor:pointer; opacity:1;
 }
-
-/* Modal */
-.modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:999;}
-.modal-content { background:rgba(45,52,54,0.95); backdrop-filter:blur(10px); margin:5vh auto; padding:20px; border-radius:20px; max-width:400px; width:90%; color:#fff;}
-.modal-content img{ width:100%; max-height:45vh; object-fit:contain; background:#000; border-radius:15px; margin-bottom:10px;}
-.modal-content input, .modal-content textarea { width:100%; padding:10px; border-radius:12px; margin-bottom:10px; background:rgba(255,255,255,0.05); color:#fff; border:none;}
-.modal-content input:read-only, .modal-content textarea:read-only { background:transparent; }
-.button-grid{ display:grid; grid-template-columns:1fr 1fr; gap:6px;}
-.modal-content button{ padding:6px 8px; font-size:13px; border-radius:10px; border:none; color:#fff; cursor:pointer;}
+.modal {display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:999;}
+.modal-content {background:rgba(45,52,54,0.95); backdrop-filter:blur(10px); margin:5vh auto; padding:20px; border-radius:20px; max-width:400px; width:90%; color:#fff;}
+.modal-content img{width:100%; max-height:45vh; object-fit:contain; background:#000; border-radius:15px; margin-bottom:10px;}
+.modal-content input, .modal-content textarea {width:100%; padding:10px; border-radius:12px; margin-bottom:10px; background:rgba(255,255,255,0.05); color:#fff; border:none;}
+.modal-content input:read-only, .modal-content textarea:read-only {background:transparent;}
+.button-grid{display:grid; grid-template-columns:1fr 1fr; gap:6px;}
+.modal-content button{padding:6px 8px; font-size:13px; border-radius:10px; border:none; color:#fff; cursor:pointer;}
 .btn-edit{background:#6c5ce7;} .btn-down{background:#00b894;} .btn-del{background:#d63031;} .btn-close{background:#636e72;}
 </style>
 </head>
 <body>
 
-<h1> My Photo Memories 📸</h1>
+<h1>My Photo Memories 📸</h1>
 <p class="sub-desc">
 Upload your photo memories and access them anytime, even if your phone is lost.
-Your images are private — only you can see and access them, not any third parties or even us 🤝
+Your images are private — only you can see and access them, not any third parties or even us 👍
 </p>
 
 <div class="container">
@@ -83,13 +68,14 @@ Your images are private — only you can see and access them, not any third part
         <input type="file" id="image" accept="image/*">
         <label for="date">Select Date (optional):</label>
         <input type="date" id="date">
-   <label for="discription">Description (optional):</label>
-        <textarea id="description" placeholder="Descripe  your image..."></textarea>
+        <label for="description">Description (optional):</label>
+        <textarea id="description" placeholder="Describe your memory..."></textarea>
         <button onclick="addMemory()">Save Memory</button>
-      
         <div class="search-box">
-            <input type="text" id="search" placeholder="Search image by your description..." onkeyup="filterMemories()">
+            <input type="text" id="search" placeholder="Search memories..." onkeyup="filterMemories()">
         </div>
+        <label for="filter-date">Filter by date:</label>
+        <input type="date" id="filter-date" onchange="filterMemories()">
     </div>
 
     <div class="gallery-panel">
@@ -100,9 +86,7 @@ Your images are private — only you can see and access them, not any third part
 <div class="modal" id="modal">
     <div class="modal-content">
         <img id="modal-image">
-        <label>Memory Date</label>
         <input type="date" id="modal-date" readonly>
-        <label>Description</label>
         <textarea id="modal-desc" readonly></textarea>
         <div class="button-grid">
             <button id="edit-btn" class="btn-edit" onclick="handleEdit()">Edit</button>
@@ -119,32 +103,32 @@ let currentMemoryIndex = null;
 let isEditing = false;
 
 function addMemory(){
-    const imgFile=document.getElementById("image").files[0];
-    let date=document.getElementById("date").value;
-    const desc=document.getElementById("description").value.trim();
-    if(!imgFile){ alert("Add an image!"); return; }
-    if(!date){ date=new Date().toISOString().split('T')[0]; }
+    const file = document.getElementById("image").files[0];
+    let date = document.getElementById("date").value;
+    const desc = document.getElementById("description").value.trim();
+    if(!file){ alert("Add an image!"); return;}
+    if(!date){ date = new Date().toISOString().split('T')[0]; }
 
-    const reader=new FileReader();
-    reader.onload=()=> {
-        memories.push({ image:reader.result, date, description:desc });
+    const reader = new FileReader();
+    reader.onload = () => {
+        memories.push({ src: reader.result, date, description: desc });
         saveAndRefresh();
         document.getElementById("image").value="";
         document.getElementById("date").value="";
         document.getElementById("description").value="";
     };
-    reader.readAsDataURL(imgFile);
+    reader.readAsDataURL(file);
 }
 
 function displayMemories(list){
-    const gallery=document.getElementById("gallery");
+    const gallery = document.getElementById("gallery");
     gallery.innerHTML="";
-    if(list.length===0){ gallery.innerHTML=`<p style="color:#fff;text-align:center;opacity:0.7;">No memories found 🖼️</p>`; return;}
-    list.forEach((mem,index)=>{
-        const card=document.createElement("div");
-        card.className="card";
+    if(list.length === 0){ gallery.innerHTML=`<p style="color:#fff;text-align:center;opacity:0.7;">No memories found 🖼️</p>`; return;}
+    list.forEach((mem, index)=>{
+        const card = document.createElement("div");
+        card.className = "card";
         card.innerHTML=`
-            <img src="${mem.image}">
+            <img src="${mem.src}">
             <div class="card-body">
                 <div class="date">${mem.date}</div>
                 <div class="description">${mem.description||""}</div>
@@ -156,57 +140,57 @@ function displayMemories(list){
 }
 
 function openModal(index){
-    currentMemoryIndex=index;
-    const mem=memories[index];
-    document.getElementById("modal-image").src=mem.image;
-    document.getElementById("modal-date").value=mem.date;
-    document.getElementById("modal-desc").value=mem.description||"";
-    isEditing=false;
-    document.getElementById("modal-date").readOnly=true;
-    document.getElementById("modal-desc").readOnly=true;
-    document.getElementById("edit-btn").innerText="Edit";
-    document.getElementById("edit-btn").style.background="#6c5ce7";
-    document.getElementById("modal").style.display="block";
+    currentMemoryIndex = index;
+    const mem = memories[index];
+    document.getElementById("modal-image").src = mem.src;
+    document.getElementById("modal-date").value = mem.date;
+    document.getElementById("modal-desc").value = mem.description||"";
+    isEditing = false;
+    document.getElementById("modal-date").readOnly = true;
+    document.getElementById("modal-desc").readOnly = true;
+    document.getElementById("edit-btn").innerText = "Edit";
+    document.getElementById("edit-btn").style.background = "#6c5ce7";
+    document.getElementById("modal").style.display = "block";
 }
 
 function handleEdit(){
-    const desc=document.getElementById("modal-desc");
-    const date=document.getElementById("modal-date");
-    const btn=document.getElementById("edit-btn");
+    const desc = document.getElementById("modal-desc");
+    const date = document.getElementById("modal-date");
+    const btn = document.getElementById("edit-btn");
     if(!isEditing){
-        isEditing=true;
-        desc.readOnly=false;
-        date.readOnly=false;
-        btn.innerText="Save";
-        btn.style.background="#00b894";
-    } else {
-        memories[currentMemoryIndex].description=desc.value;
-        memories[currentMemoryIndex].date=date.value;
+        isEditing = true;
+        desc.readOnly = false;
+        date.readOnly = false;
+        btn.innerText = "Save";
+        btn.style.background = "#00b894";
+    } else{
+        memories[currentMemoryIndex].description = desc.value;
+        memories[currentMemoryIndex].date = date.value;
         saveAndRefresh();
-        isEditing=false;
-        desc.readOnly=true;
-        date.readOnly=true;
-        btn.innerText="Edit";
-        btn.style.background="#6c5ce7";
+        isEditing = false;
+        desc.readOnly = true;
+        date.readOnly = true;
+        btn.innerText = "Edit";
+        btn.style.background = "#6c5ce7";
     }
 }
 
-function deleteMemory(){ if(!confirm("Delete this memory?")) return; memories.splice(currentMemoryIndex,1); saveAndRefresh(); closeModal(); }
-function downloadMemory(){ const mem=memories[currentMemoryIndex]; const a=document.createElement("a"); a.href=mem.image; a.download=`Memory_${mem.date}.png`; a.click();}
+function deleteMemory(){ if(!confirm("Delete this memory?")) return; memories.splice(currentMemoryIndex,1); saveAndRefresh(); closeModal();}
+function downloadMemory(){ const mem = memories[currentMemoryIndex]; const a = document.createElement("a"); a.href = mem.src; a.download = `Memory_${mem.date}.png`; a.click();}
 function closeModal(){ document.getElementById("modal").style.display="none"; }
 
 function filterMemories(){
-    const term=document.getElementById("search").value.toLowerCase();
-    const filterDate=document.getElementById("filter-date").value;
-    const filtered=memories.filter(m=>{
-        const matchesDesc=(m.description||"").toLowerCase().includes(term);
-        const matchesDate=filterDate? m.date===filterDate:true;
+    const term = document.getElementById("search").value.toLowerCase();
+    const filterDate = document.getElementById("filter-date").value;
+    const filtered = memories.filter(m=>{
+        const matchesDesc = (m.description||"").toLowerCase().includes(term);
+        const matchesDate = filterDate? m.date===filterDate:true;
         return matchesDesc && matchesDate;
     });
     displayMemories(filtered);
 }
 
-function saveAndRefresh(){ localStorage.setItem("memories",JSON.stringify(memories)); filterMemories();}
+function saveAndRefresh(){ localStorage.setItem("memories", JSON.stringify(memories)); filterMemories(); }
 displayMemories(memories);
 </script>
 
